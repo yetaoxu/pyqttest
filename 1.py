@@ -7,39 +7,38 @@ class Example(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.InitUI()
 
-    def initUI(self):
-        self.filewidget = filelabel(self)
-        self.setCentralWidget(self.filewidget)
+    def InitUI(self):
+        self.FileWidget = FileLabel(self)
+        self.setCentralWidget(self.FileWidget)
         self.statusBar()
-        openFile = QAction(QIcon('open.png'), 'Open', self)
+        openFile = QAction('Open', self)
         openFile.setShortcut('Ctrl+O')
         openFile.setStatusTip('Open new File')
-        openFile.triggered.connect(self.filewidget.showDialog)
+        openFile.triggered.connect(self.FileWidget.ShowDialog)
 
-        menubar = self.menuBar()
-        fileMenu = menubar.addMenu('&File')
-        fileMenu.addAction(openFile)
-
+        MenuBar = self.menuBar()
+        FileMenu = MenuBar.addMenu('&File')
+        FileMenu.addAction(openFile)
         self.resize(450, 250)
-        self.center()
-    def center(self):
+        self.Center()
+    def Center(self):
         screen = QDesktopWidget().screenGeometry()
         size = self.geometry()
         self.move((screen.width() - size.width()) / 2, (screen.height() - size.height()) / 2)
         self.setWindowTitle('File dialog')
         self.show()
 
-class filelabel(QWidget):
+class FileLabel(QWidget):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self.initfilelabel()
+        self.initFileLabel()
 
-    def initfilelabel(self):
-        self.filenamelabel = QLabel('filename')
-        self.pathlabel = QLabel('path')
+    def initFileLabel(self):
+        self.FileNameLabel = QLabel('filename')
+        self.PathLabel = QLabel('path')
         self.FilePathEdit = QLineEdit()
         self.FilePathEdit.setReadOnly(True)
         self.FileMd5Edit = QLineEdit()
@@ -56,26 +55,26 @@ class filelabel(QWidget):
         self.hlayout.addItem(self.spa1)
         self.hlayout.addLayout(self.qfl)
         self.hlayout.addItem(self.spa2)
-        self.qfl.addWidget(self.filenamelabel)
-        self.qfl.addWidget(self.pathlabel)
-        self.qfl.addRow(self.filenamelabel, self.FilePathEdit)
-        self.qfl.addRow(self.pathlabel, self.FileMd5Edit)
+        self.qfl.addWidget(self.FileNameLabel)
+        self.qfl.addWidget(self.PathLabel)
+        self.qfl.addRow(self.FileNameLabel, self.FilePathEdit)
+        self.qfl.addRow(self.PathLabel, self.FileMd5Edit)
         self.FilePathEdit.setPlaceholderText("请选择文件路径")
         self.FileMd5Edit.setPlaceholderText("将显示文件的md5")
         self.qfl.setHorizontalSpacing(8)
         self.setLayout(self.hlayout)
 
-    def showDialog(self):
+    def ShowDialog(self):
         fname = QFileDialog.getOpenFileName(self, 'Open file', '/User/xuyetao/Document')
         if fname[0]:
             f = open(fname[0], 'rb')
-            md5_obj = hashlib.md5()
-            md5_obj.update(f.read())
-            hash_code = md5_obj.hexdigest()
+            Md5Obj = hashlib.md5()
+            Md5Obj.update(f.read())
+            HashCode = Md5Obj.hexdigest()
             f.close()
-            md5 = str(hash_code).lower()
+            Md5 = str(HashCode).lower()
             self.FilePathEdit.setText(fname[0])
-            self.FileMd5Edit.setText(md5)
+            self.FileMd5Edit.setText(Md5)
 
 if __name__ == '__main__':
 
