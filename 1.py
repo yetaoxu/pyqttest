@@ -22,7 +22,7 @@ class Example(QMainWindow):
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(openFile)
 
-        self.resize(400, 100)
+        self.resize(450, 250)
         self.center()
     def center(self):
         screen = QDesktopWidget().screenGeometry()
@@ -38,14 +38,23 @@ class filelabel(QWidget):
         self.initfilelabel()
 
     def initfilelabel(self):
+        self.filenamelabel = QLabel('filename')
+        font = QFont()
+        font.setWeight(75)
+        font.setPointSize(20)
+        self.filenamelabel.setFont(font)
+        self.pathlabel = QLabel('path')
+        self.pathlabel.setFont(font)
         self.FilePathEdit = QLineEdit()
         self.FilePathEdit.setReadOnly(True)
         self.FileMd5Edit = QLineEdit()
         self.FileMd5Edit.setReadOnly(True)
 
         self.qfl = QFormLayout()
-        self.qfl.addRow('FilePath', self.FilePathEdit)
-        self.qfl.addRow('FileMd5', self.FileMd5Edit)
+        self.qfl.addWidget(self.filenamelabel)
+        self.qfl.addWidget(self.pathlabel)
+        self.qfl.addRow(self.filenamelabel, self.FilePathEdit)
+        self.qfl.addRow(self.pathlabel, self.FileMd5Edit)
         self.FilePathEdit.setPlaceholderText("请选择文件路径")
         self.FileMd5Edit.setPlaceholderText("将显示文件的md5")
         self.qfl.setHorizontalSpacing(30)
