@@ -119,6 +119,7 @@ class win2(QDialog):
         self.progressBar.setValue(value)
         if value == 100:
             QMessageBox.information(self, "Info", "success ！")
+            self.close()
             return
 
     def center(self):
