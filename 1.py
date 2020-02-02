@@ -39,26 +39,31 @@ class filelabel(QWidget):
 
     def initfilelabel(self):
         self.filenamelabel = QLabel('filename')
-        font = QFont()
-        font.setWeight(75)
-        font.setPointSize(20)
-        self.filenamelabel.setFont(font)
         self.pathlabel = QLabel('path')
-        self.pathlabel.setFont(font)
         self.FilePathEdit = QLineEdit()
         self.FilePathEdit.setReadOnly(True)
         self.FileMd5Edit = QLineEdit()
         self.FileMd5Edit.setReadOnly(True)
 
+        self.FilePathEdit.setMinimumWidth(250)
+        self.FileMd5Edit.setMinimumWidth(250)
+
+        self.spa1 = QSpacerItem(50, 50)
+        self.spa2 = QSpacerItem(50, 50)
         self.qfl = QFormLayout()
+
+        self.hlayout = QHBoxLayout()
+        self.hlayout.addItem(self.spa1)
+        self.hlayout.addLayout(self.qfl)
+        self.hlayout.addItem(self.spa2)
         self.qfl.addWidget(self.filenamelabel)
         self.qfl.addWidget(self.pathlabel)
         self.qfl.addRow(self.filenamelabel, self.FilePathEdit)
         self.qfl.addRow(self.pathlabel, self.FileMd5Edit)
         self.FilePathEdit.setPlaceholderText("请选择文件路径")
         self.FileMd5Edit.setPlaceholderText("将显示文件的md5")
-        self.qfl.setHorizontalSpacing(30)
-        self.setLayout(self.qfl)
+        self.qfl.setHorizontalSpacing(8)
+        self.setLayout(self.hlayout)
 
     def showDialog(self):
         fname = QFileDialog.getOpenFileName(self, 'Open file', '/User/xuyetao/Document')

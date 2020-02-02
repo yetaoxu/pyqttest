@@ -20,6 +20,9 @@ class wi(QWidget):
         self.UrlInfo.setReadOnly(True)
         self.DirInfo = QLineEdit()
         self.DirInfo.setReadOnly(True)
+        self.UrlInfo.setFont(font)
+        self.DirInfo.setFont(font)
+
 
         self.qfl = QFormLayout()
         self.qfl.addWidget(self.urllabel)
