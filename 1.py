@@ -1,6 +1,3 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
-
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import sys
@@ -10,7 +7,6 @@ class Example(QMainWindow):
 
     def __init__(self):
         super().__init__()
-
         self.initUI()
 
     def initUI(self):
@@ -29,11 +25,8 @@ class Example(QMainWindow):
         self.resize(400, 100)
         self.center()
     def center(self):
-        # 获取屏幕的大小
         screen = QDesktopWidget().screenGeometry()
-        # 获取窗口的大小
         size = self.geometry()
-        # 将窗口移动到屏幕中央
         self.move((screen.width() - size.width()) / 2, (screen.height() - size.height()) / 2)
         self.setWindowTitle('File dialog')
         self.show()
@@ -59,7 +52,6 @@ class filelabel(QWidget):
         self.setLayout(self.qfl)
 
     def showDialog(self):
-
         fname = QFileDialog.getOpenFileName(self, 'Open file', '/User/xuyetao/Document')
         if fname[0]:
             f = open(fname[0], 'rb')
@@ -70,7 +62,6 @@ class filelabel(QWidget):
             md5 = str(hash_code).lower()
             self.FilePathEdit.setText(fname[0])
             self.FileMd5Edit.setText(md5)
-
 
 if __name__ == '__main__':
 
